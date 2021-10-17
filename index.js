@@ -36,7 +36,7 @@ const urlencodedParser = bodyParser.urlencoded({
     extended: false,
 });
 
-const PORT = 8084;
+const PORT = process.env.PORT || 8084;
 app.listen(PORT, (req, res) => {
     console.log(`server listening on port: ${PORT}`);
 });
