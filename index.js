@@ -42,7 +42,7 @@ app.listen(PORT, (req, res) => {
 });
 
 // Test
-app.get('/', (req, res) => res.send('<main><h1>webreznov application</h1><h3>Server was running</h3></main>'));
+app.get('/', (req, res) => res.send(`<main><h1>webreznov application</h1><h3>This page was running at ${new Date()}</h3></main>`));
 app.get('/api/test/counter', test.testCounter);
 app.get('/api/test/write-file', test.testWriteFile);
 
