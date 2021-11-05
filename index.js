@@ -48,7 +48,9 @@ app.get('/api/test/write-file', test.testWriteFile);
 
 // Email
 
-// app.get('/api/email/read-user-contact', email.toReadUserContact);
+app.get('/api/get/contacts/:id', email.toReadUserContact);
+app.delete('/api/contacts/delete/:id', email.deleteContactById);
+app.get('/api/email/get/all', email.toReadUserContactsAll);
 app.post('/api/email/add', urlencodedParser, email.toAddUserContact);
 
 module.exports = app;
