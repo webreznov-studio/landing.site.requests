@@ -1,5 +1,8 @@
 # landing2server
 
+Heroku hosting
+
+https://webreznov-landing-site-request.herokuapp.com
 ##
 ExpressJS
 PostgreSQL
