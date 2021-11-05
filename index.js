@@ -41,8 +41,41 @@ app.listen(PORT, (req, res) => {
     console.log(`server listening on port: ${PORT}`);
 });
 
+var getMainPathLayout = `
+<main>
+    <h1>webreznov application</h1>
+    <h3>This page was running at ${new Date()}</h3>
+    <hr />
+
+    <h3>Получить контакт по id</h3>
+    <strong>Локально</strong>
+    <p>http://localhost:${PORT}/api/get/contacts/:id</p>
+    <strong>Prod</strong>
+    <p>https://webreznov-landing-site-request.herokuapp.com/api/get/contacts/:id</p>
+
+    <h3>Получить список всех контактов</h3>
+    <strong>Локально</strong>
+    <p>http://localhost:${PORT}/api/email/get/all</p>
+    <strong>Prod</strong>
+    <p>https://webreznov-landing-site-request.herokuapp.com/api/email/get/all</p>
+
+    <h3>Удалить контакт по id</h3>
+    <strong>Локально</strong>
+    <p>http://localhost:${PORT}/api/contacts/delete/:id</p>
+    <strong>Prod</strong>
+    <p>https://webreznov-landing-site-request.herokuapp.com/api/contacts/delete/:id</p>
+
+    <h3>Добавить новую заявку</h3>
+    <strong>Локально</strong>
+    <p>http://localhost:${PORT}/api/email/add</p>
+    <strong>Prod</strong>
+    <p>https://webreznov-landing-site-request.herokuapp.com/api/email/add</p>
+
+</main>
+`;
+
 // Test
-app.get('/', (req, res) => res.send(`<main><h1>webreznov application</h1><h3>This page was running at ${new Date()}</h3></main>`));
+app.get('/', (req, res) => res.send(getMainPathLayout));
 app.get('/api/test/counter', test.testCounter);
 app.get('/api/test/write-file', test.testWriteFile);
 
