@@ -42,36 +42,53 @@ app.listen(PORT, (req, res) => {
 });
 
 var getMainPathLayout = `
-<main>
-    <h1>webreznov application</h1>
-    <h3>This page was running at ${new Date()}</h3>
-    <hr />
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>webreznov application API</title>
+</head>
+<body>
+    <main>
+        <h1>webreznov application</h1>
+        <h3>This page was running at ${new Date()}</h3>
+        <hr />
 
-    <h3>Получить контакт по id</h3>
-    <strong>Локально</strong>
-    <p>http://localhost:${PORT}/api/get/contacts/:id</p>
-    <strong>Prod</strong>
-    <p>https://webreznov-landing-site-request.herokuapp.com/api/get/contacts/:id</p>
+        <h3>Получить контакт по id</h3>
+        <strong>Локально</strong>
+        <p>http://localhost:${PORT}/api/get/contacts/:id</p>
+        <div>
+            <strong>Prod</strong>
+        </div>
+        <a href="https://webreznov-landing-site-request.herokuapp.com/api/get/contacts/:id" target="_blank">https://webreznov-landing-site-request.herokuapp.com/api/get/contacts/:id</a>
 
-    <h3>Получить список всех контактов</h3>
-    <strong>Локально</strong>
-    <p>http://localhost:${PORT}/api/email/get/all</p>
-    <strong>Prod</strong>
-    <p>https://webreznov-landing-site-request.herokuapp.com/api/email/get/all</p>
+        <h3 style="margin-top: 40px">Получить список всех контактов</h3>
+        <strong>Локально</strong>
+        <p>http://localhost:${PORT}/api/email/get/all</p>
+        <div>
+            <strong>Prod</strong>
+        </div>
+        <a href="https://webreznov-landing-site-request.herokuapp.com/api/email/get/all" target="_blank">https://webreznov-landing-site-request.herokuapp.com/api/email/get/all</a>
 
-    <h3>Удалить контакт по id</h3>
-    <strong>Локально</strong>
-    <p>http://localhost:${PORT}/api/contacts/delete/:id</p>
-    <strong>Prod</strong>
-    <p>https://webreznov-landing-site-request.herokuapp.com/api/contacts/delete/:id</p>
+        <h3 style="margin-top: 40px">Удалить контакт по id</h3>
+        <strong>Локально</strong>
+        <p>http://localhost:${PORT}/api/contacts/delete/:id</p>
+        <div>
+            <strong>Prod</strong>
+        </div>
+        <a href="https://webreznov-landing-site-request.herokuapp.com/api/contacts/delete/:id" target="_blank">https://webreznov-landing-site-request.herokuapp.com/api/contacts/delete/:id</a>
 
-    <h3>Добавить новую заявку</h3>
-    <strong>Локально</strong>
-    <p>http://localhost:${PORT}/api/email/add</p>
-    <strong>Prod</strong>
-    <p>https://webreznov-landing-site-request.herokuapp.com/api/email/add</p>
-
-</main>
+        <h3 style="margin-top: 40px">Добавить новую заявку</h3>
+        <strong>Локально</strong>
+        <p>http://localhost:${PORT}/api/email/add</p>
+        <div>
+            <strong>Prod</strong>
+        </div>
+        <a href="https://webreznov-landing-site-request.herokuapp.com/api/email/add" target="_blank">https://webreznov-landing-site-request.herokuapp.com/api/email/add</a>
+    </main>
+</body>
+</html>
 `;
 
 // Test
