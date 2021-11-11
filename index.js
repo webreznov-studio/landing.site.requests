@@ -55,7 +55,10 @@ var getMainPathLayout = `
         <h3>This page was running at ${new Date()}</h3>
         <hr />
 
-        <h3>Получить контакт по id</h3>
+        <h3 style="margin-top: 40px">Время в Канаде, Торонто</h3>
+        <p>${new Date().toLocaleString("en-GB", {timeZone: "America/Toronto"})}</p>
+
+        <h3 style="margin-top: 60px">Получить контакт по id</h3>
         <strong>Локально</strong>
         <p>http://localhost:${PORT}/api/get/contacts/:id</p>
         <div>
