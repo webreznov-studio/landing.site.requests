@@ -7,6 +7,7 @@ const cors = require('cors');
 
 var test = require('./api/test.js');
 var email = require('./api/email.js');
+var portfolio = require('./api/portfolio.js');
 
 const whitelist = [
     process.env.LOCALHOST_3000,
@@ -100,10 +101,12 @@ app.get('/api/test/counter', test.testCounter);
 app.get('/api/test/write-file', test.testWriteFile);
 
 // Email
-
 app.get('/api/get/contacts/:id', email.toReadUserContact);
 app.delete('/api/contacts/delete/:id', email.deleteContactById);
 app.get('/api/email/get/all', email.toReadUserContactsAll);
 app.post('/api/email/add', urlencodedParser, email.toAddUserContact);
+
+// Portfolio
+app.get('/api/portfolio/all', portfolio.getPortfolioAll);
 
 module.exports = app;
