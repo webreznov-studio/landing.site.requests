@@ -1,4 +1,6 @@
-# landing2server
+# webreznov apps
+
+Landing + portfolio + services
 
 Heroku hosting
 
@@ -6,6 +8,3 @@ https://webreznov-landing-site-request.herokuapp.com
 ##
 ExpressJS
 PostgreSQL
-
-### ToDo list
-1. add usefull links: docs, examples
