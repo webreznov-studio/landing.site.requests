@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Admin page</title>
+		<link
+			href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+			rel="stylesheet"
+			integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+			crossorigin="anonymous"
+		/>
+		<style>
+            body {
+                background: #1b1b1b;
+                color: #FFFFFF;
+            }
+			.form-field {
+				width: 400px;
+				display: flex;
+				justify-content: space-between;
+			}
+			.form-field input,
+			.form-field textarea {
+				width: 280px;
+			}
+			table * {
+				color: #FFFFFF;
+			}
+		</style>
+	</head>
+	<body>
+		<main class="container">
+			<h1>webreznov main app</h1>
+			<h3>This page was running at <span id="DATE_SERVER_START"></span></h3>
+
+			<div id="login-panel">
+				<form class="row g-3 needs-validation" novalidate>
+					<div class="col-12">
+						<label for="validationCustom01" class="form-label">Логин</label>
+						<input type="text" class="form-control" id="validationCustom01" required />
+						<div class="invalid-feedback">Не может быть пустым</div>
+					</div>
+					<div class="col-12">
+						<label for="validationCustomUsername" class="form-label">Пароль</label>
+						<div class="input-group has-validation">
+							<!-- <span class="input-group-text" id="inputGroupPrepend">@</span> -->
+							<input
+								type="text"
+								class="form-control"
+								id="validationCustomUsername"
+								aria-describedby="inputGroupPrepend"
+								required
+							/>
+							<div class="invalid-feedback">Не может быть пустым</div>
+						</div>
+					</div>
+	
+					<div id="login-error"></div>
+	
+					<div class="col-12">
+						<button class="btn btn-primary" type="submit">Авторизоваться</button>
+					</div>
+				</form>
+			</div>
+
+			<div id="adm-panel" class="d-none">
+				<ul class="nav nav-tabs" id="myTab" role="tablist">
+					<li class="nav-item" role="presentation">
+						<button
+							class="nav-link active"
+							id="list-api-tab"
+							data-bs-toggle="tab"
+							data-bs-target="#list-api"
+							type="button"
+							role="tab"
+							aria-controls="list-api"
+							aria-selected="true"
+						>
+							Список API
+						</button>
+					</li>
+					<li class="nav-item" role="presentation">
+						<button
+							class="nav-link"
+							id="add-project-tab"
+							data-bs-toggle="tab"
+							data-bs-target="#add-project"
+							type="button"
+							role="tab"
+							aria-controls="add-project"
+							aria-selected="false"
+						>
+							Добавить Проект
+						</button>
+					</li>
+					<li class="nav-item" role="presentation">
+						<button
+							class="nav-link"
+							id="request-list-tab"
+							data-bs-toggle="tab"
+							data-bs-target="#request-list"
+							type="button"
+							role="tab"
+							aria-controls="request-list"
+							aria-selected="false"
+						>
+							Список заявок
+						</button>
+					</li>
+                    <li class="nav-item" role="presentation">
+						<button
+							class="nav-link"
+							id="project-list-tab"
+							data-bs-toggle="tab"
+							data-bs-target="#project-list"
+							type="button"
+							role="tab"
+							aria-controls="project-list"
+							aria-selected="false"
+						>
+							Список проектов
+						</button>
+					</li>
+				</ul>
+				<div class="tab-content mt-5" id="myTabContent">
+					<!-- Tab: Список API -->
+					<div class="tab-pane fade show active" id="list-api" role="tabpanel" aria-labelledby="list-api-tab">
+						<div class="list-group">
+							<a href="#" class="list-group-item list-group-item-action list-group-item-success d-flex justify-content-between">
+								<span>/api/portfolio/all</span>
+								<span>Получить список проектов. Параметры: pageNumber, counter</span>
+							</a>
+							<a href="#" class="list-group-item list-group-item-action list-group-item-danger d-flex justify-content-between">
+								<span>/api/portfolio/all</span>
+								<span>Получить список проектов. <b>Параметры: pageNumber, counter</b></span>
+							</a>
+						</div>
+					</div>
+					<!-- Tab: Добавить Проект -->
+					<div class="tab-pane fade" id="add-project" role="tabpanel" aria-labelledby="home-tab">
+						<div class="mt-5 mb-5">
+							<form enctype="multipart/form-data" name="addNewProjectForm" id="addNewProjectForm">
+								<div class="mb-3 form-field">
+									<label for="projectName">projectName</label>
+									<input
+										type="text"
+										name="projectName"
+										placeholder="projectName"
+										id="projectName"
+									/>
+								</div>
+
+								<div class="mb-3 form-field">
+									<label for="description">description</label>
+									<textarea
+										type="text"
+										name="description"
+										placeholder="description"
+										id="description"
+									></textarea>
+								</div>
+
+								<div class="mb-3 form-field">
+									<label for="tools">tools</label>
+									<input
+										type="text"
+										name="tools"
+										placeholder="tools"
+										id="tools"
+									/>
+								</div>
+
+								<div class="mb-3 form-field">
+									<label for="images">images</label>
+									<input
+										type="text"
+										name="images"
+										placeholder="images"
+										id="images"
+									/>
+								</div>
+
+								<div class="mb-3 form-field">
+									<label for="links">links</label>
+									<input type="text" name="links" placeholder="links" id="links" />
+								</div>
+							</form>
+							<button class="btn btn-success" onclick="addNewProject()">Добавить</button>
+						</div>
+					</div>
+					<!-- Tab: Список проектов -->
+					<div class="tab-pane fade" id="request-list" role="tabpanel" aria-labelledby="profile-tab">
+						<button type="button" class="btn btn-primary mt-3" onclick="getAllProjectButton();">
+							Смотреть проекты
+						</button>
+
+						<table class="table" id="resultBlock">
+							<tr>
+								<th scope="col">#</th>
+								<th scope="col">Project name</th>
+								<th scope="col">Description</th>
+								<th scope="col">tools</th>
+								<th scope="col">images</th>
+								<th scope="col">links</th>
+								<th scope="col">actions</th>
+							</tr>
+						</table>
+					</div>
+					<!-- Tab: Список заявок -->
+                    <div class="tab-pane fade" id="project-list" role="tabpanel" aria-labelledby="profile-tab">
+						GET list projects
+                    </div>
+				</div>
+				<!-- <button type="button" class="btn btn-success" onclick="postAddStory();">Admin_POST_add_story</button> -->
+				<!-- <a onclick="fetch('http://localhost:8084/api/admin/upload')" class="btn btn-danger d-inline m-3">UPLOAD from JSON</a> -->
+				<!-- <a onclick="fetch('http://localhost:8084/api/admin/end')" class="btn btn-danger d-inline m-3">END DB CONNECTION</a> -->
+			</div>
+		</main>
+
+		<script>
+			const loginPanel = document.getElementById('login-panel');
+			const admPanel = document.getElementById('adm-panel');
+			let allowApi = false;
+		</script>
+		<script>
+			(function () {
+				'use strict';
+
+				// Fetch all the forms we want to apply custom Bootstrap validation styles to
+				var forms = document.querySelectorAll('.needs-validation');
+
+				// Loop over them and prevent submission
+				Array.prototype.slice.call(forms).forEach(function (form) {
+					form.addEventListener(
+						'submit',
+						function (event) {
+							event.preventDefault();
+							if (!form.checkValidity()) {
+								event.stopPropagation();
+							}
+							form.classList.add('was-validated');
+							return authAdmin();
+						},
+						false
+					);
+				});
+			})();
+		</script>
+		
+		<script>
+			const GET_HOST = 'https://webreznov-landing-site-request.herokuapp.com' || 'http://localhost:8084';
+			const DATE_SERVER_START = new Date();
+			const dateSpan = document.getElementById('DATE_SERVER_START');
+			dateSpan.innerText = DATE_SERVER_START;
+
+			const resultBlock = document.getElementById('resultBlock');
+
+			function getAllProjectButton() {
+				if (!allowApi) return;
+				fetch(`${GET_HOST}/api/portfolio/all`)
+					.then((res) => res.json())
+					.then((data) =>
+						data.map((item) => {
+							resultBlock.insertAdjacentHTML(
+								'beforeend',
+								`
+                        <tr>
+                            <td>${item.id}</td>
+                            <td>${item.projectName}</td>
+                            <td>${item.description}</td>
+                            <td>${item.tools}</td>
+                            <td>${item.images}</td>
+                            <td>${item.links}</td>
+                            <td>
+                                <a onclick="fetch('${GET_HOST}/api/admin/delete/${item.id}', {method: 'DELETE'})" class="btn btn-danger d-inline">Del</a>
+                            </td>
+                        </tr>
+                    `
+							);
+						})
+					);
+			}
+
+			function mapDataToServer() {
+				if (!allowApi) return;
+				const elem = (id) => document.getElementById(id);
+
+				const projectName = elem('projectName');
+				const description = elem('description');
+				const tools = elem('tools');
+				const images = elem('images');
+				const links = elem('links');
+
+				return {
+					projectName: projectName.value,
+					description: description.value,
+					tools: tools.value,
+					images: images.value,
+					links: links.value,
+				};
+			}
+
+			async function addNewProject() {
+				if (!allowApi) return;
+				// const addNewProjectForm = new FormData(document.getElementById('addNewProjectForm'));
+
+				let response = await fetch(`${GET_HOST}/api/portfolio/add-new-project`, {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json;charset=utf-8',
+					},
+					body: JSON.stringify(mapDataToServer()),
+				});
+				let result = await response.json();
+				alert(result.message);
+			}
+		</script>
+		<script>
+			async function authAdmin() {
+				const login = document.getElementById('validationCustom01').value;
+				const password = document.getElementById('validationCustomUsername').value;
+
+				try {
+					const response = await fetch(`${GET_HOST}/api/admin/login`, {
+						method: 'POST',
+						headers: {
+							'Content-Type': 'application/json;charset=utf-8',
+						},
+						body: JSON.stringify({
+							login: login,
+							password: password,
+						}),
+					});
+					
+					const config = await response.json();
+
+					if (config.auth) {
+						loginPanel.className = 'd-none' // hide
+						admPanel.className = '' // show
+						allowApi = true;
+					} else {
+						loginPanel
+							.insertAdjacentHTML(
+								'beforeend',
+								`<div class="alert alert-danger" role="alert">${config.message}</div>`
+							);
+					}
+					return console.log(config);
+				} catch (error) {
+					return console.log(error)
+				}
+			}
+		</script>
+		<script
+			src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+			integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+			crossorigin="anonymous"
+		></script>
+	</body>
+</html>

@@ -1,7 +1,17 @@
 const PORT = process.env.PORT || 8080;
+const GET_HOST = process.env.GET_HOST || 'http://localhost';
 
 const {nanoid} = require('nanoid');
 const {Client} = require('pg');
+
+const connectDB = function () {
+    return new Client({
+        connectionString: process.env.POSTGRES_URI,
+        ssl: {
+            rejectUnauthorized: false,
+        },
+    });
+}
 
 /********** Api ***********/
 
@@ -10,12 +20,7 @@ console.log(`##email http://localhost:${PORT}/api/email/add`);
 exports.toAddUserContact = (req, res) => {
     const {siteType, siteExsistUrl, clientName, email, contacts, exampleSitesUrls, functionOfSite, designSite, regionAudit, auditorsSite} = req.body;
 
-    const client = new Client({
-        connectionString: process.env.POSTGRES_URI,
-        ssl: {
-            rejectUnauthorized: false,
-        },
-    });
+    const client = connectDB();
 
     client.connect();
 
@@ -25,7 +30,7 @@ exports.toAddUserContact = (req, res) => {
             if (errorDb) {
                 console.log(errorDb);
                 client.end();
-                return res.sendStatus(500);
+                return res.sendStatus(400).json({auth: false, message: 'Ошибка:('});
             }
             for (let row of resultDb.rows) {
                 console.log('#+#+#+#+', JSON.stringify(row));
@@ -41,12 +46,8 @@ exports.toAddUserContact = (req, res) => {
 console.log(`##email http://localhost:${PORT}/api/get/contacts/:id`);
 exports.toReadUserContact = (req, res) => {
     const {id} = req.params;
-    const client = new Client({
-        connectionString: process.env.POSTGRES_URI,
-        ssl: {
-            rejectUnauthorized: false,
-        },
-    });
+    
+    const client = connectDB();
 
     client.connect();
 
@@ -85,12 +86,7 @@ SELECT id, create_date, site_type, site_exsist_url, client_name, email, example_
 */
 console.log(`##email http://localhost:${PORT}/api/email/get/all`);
 exports.toReadUserContactsAll = (req, res) => {
-    const client = new Client({
-        connectionString: process.env.POSTGRES_URI,
-        ssl: {
-            rejectUnauthorized: false,
-        },
-    });
+    const client = connectDB();
 
     client.connect();
 
@@ -114,12 +110,7 @@ console.log(`##email http://localhost:${PORT}/api/contacts/delete/:id`);
 exports.deleteContactById = (req, res) => {
     const {id} = req.params;
     console.log('START DELETE', id);
-    const client = new Client({
-        connectionString: process.env.POSTGRES_URI,
-        ssl: {
-            rejectUnauthorized: false,
-        },
-    });
+    const client = connectDB();
 
     client.connect();
     

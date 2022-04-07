@@ -5,9 +5,9 @@ const app = express();
 const helmet = require('helmet'); // creates headers that protect from attacks (security)
 const cors = require('cors');
 
-var test = require('./api/test.js');
-var email = require('./api/email.js');
-var portfolio = require('./api/portfolio.js');
+const admin = require('./api/admin.js');
+const email = require('./api/email.js');
+const portfolio = require('./api/portfolio.js');
 
 const whitelist = [
     process.env.LOCALHOST_3000,
@@ -36,69 +36,16 @@ app.use(cors(corsOptions));
 const urlencodedParser = bodyParser.urlencoded({
     extended: false,
 });
+const jsonencodedParser = bodyParser.json();
 
 const PORT = process.env.PORT || 8084;
 app.listen(PORT, (req, res) => {
     console.log(`server listening on port: ${PORT}`);
 });
 
-var getMainPathLayout = `
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>webreznov application API</title>
-</head>
-<body>
-    <main>
-        <h1>webreznov application</h1>
-        <h3>This page was running at ${new Date()}</h3>
-        <hr />
-
-        <h3 style="margin-top: 40px">Время в Канаде, Торонто</h3>
-        <p>${new Date().toLocaleString("en-GB", {timeZone: "America/Toronto"})}</p>
-
-        <h3 style="margin-top: 60px">Получить контакт по id</h3>
-        <strong>Локально</strong>
-        <p>http://localhost:${PORT}/api/get/contacts/:id</p>
-        <div>
-            <strong>Prod</strong>
-        </div>
-        <a href="https://webreznov-landing-site-request.herokuapp.com/api/get/contacts/:id" target="_blank">https://webreznov-landing-site-request.herokuapp.com/api/get/contacts/:id</a>
-
-        <h3 style="margin-top: 40px">Получить список всех контактов</h3>
-        <strong>Локально</strong>
-        <p>http://localhost:${PORT}/api/email/get/all</p>
-        <div>
-            <strong>Prod</strong>
-        </div>
-        <a href="https://webreznov-landing-site-request.herokuapp.com/api/email/get/all" target="_blank">https://webreznov-landing-site-request.herokuapp.com/api/email/get/all</a>
-
-        <h3 style="margin-top: 40px">Удалить контакт по id</h3>
-        <strong>Локально</strong>
-        <p>http://localhost:${PORT}/api/contacts/delete/:id</p>
-        <div>
-            <strong>Prod</strong>
-        </div>
-        <a href="https://webreznov-landing-site-request.herokuapp.com/api/contacts/delete/:id" target="_blank">https://webreznov-landing-site-request.herokuapp.com/api/contacts/delete/:id</a>
-
-        <h3 style="margin-top: 40px">Добавить новую заявку</h3>
-        <strong>Локально</strong>
-        <p>http://localhost:${PORT}/api/email/add</p>
-        <div>
-            <strong>Prod</strong>
-        </div>
-        <a href="https://webreznov-landing-site-request.herokuapp.com/api/email/add" target="_blank">https://webreznov-landing-site-request.herokuapp.com/api/email/add</a>
-    </main>
-</body>
-</html>
-`;
-
-// Test
-app.get('/', (req, res) => res.send(getMainPathLayout));
-app.get('/api/test/counter', test.testCounter);
-app.get('/api/test/write-file', test.testWriteFile);
+// Admin Panel
+app.get('/', (req, res) => res.sendfile(__dirname + '/page/index.html'));
+app.post('/api/admin/login', jsonencodedParser, admin.login);//login logic
 
 // Email
 app.get('/api/get/contacts/:id', email.toReadUserContact);
@@ -108,5 +55,6 @@ app.post('/api/email/add', urlencodedParser, email.toAddUserContact);
 
 // Portfolio
 app.get('/api/portfolio/all', portfolio.getPortfolioAll);
+app.post('/api/portfolio/add-new-project', [jsonencodedParser], portfolio.toAddNewProject);
 
 module.exports = app;
